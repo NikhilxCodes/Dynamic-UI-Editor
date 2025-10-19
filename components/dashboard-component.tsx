@@ -114,69 +114,75 @@ export function DashboardComponent({
         style={{
           ...getComponentStyle("header"),
           backgroundColor: `${config.sectionBackgroundColor}dd`,
-          padding: `${config.containerPadding / 2}px ${config.containerPadding}px`,
+          padding: `${config.containerPadding / 4}px ${config.containerPadding / 2}px`,
         }}
         onClick={() => onSelectComponent("header")}
       >
-        <div className="flex items-center justify-between max-w-7xl mx-auto">
-          <div className="flex items-center gap-2">
+        <div className="flex items-center justify-between max-w-7xl mx-auto px-1 sm:px-4">
+          <div className="flex items-center gap-1 sm:gap-2 min-w-0">
             {config.siteLogo ? (
               <img
                 src={config.siteLogo || "/placeholder.svg"}
                 alt="Logo"
-                className="rounded-lg object-contain"
+                className="rounded-lg object-contain flex-shrink-0"
                 style={{
-                  height: `${config.siteLogoSize || 40}px`,
-                  width: `${config.siteLogoSize || 40}px`,
+                  height: `${config.siteLogoSize ? config.siteLogoSize * 0.75 : 30}px`,
+                  width: `${config.siteLogoSize ? config.siteLogoSize * 0.75 : 30}px`,
                 }}
               />
             ) : (
               <div
-                className="rounded-lg"
+                className="rounded-lg flex-shrink-0"
                 style={{
                   backgroundColor: config.buttonBackgroundColor,
-                  height: `${config.siteLogoSize || 40}px`,
-                  width: `${config.siteLogoSize || 40}px`,
+                  height: `${config.siteLogoSize ? config.siteLogoSize * 0.75 : 30}px`,
+                  width: `${config.siteLogoSize ? config.siteLogoSize * 0.75 : 30}px`,
                 }}
               />
             )}
-            <span className="text-xl font-bold">{config.siteName}</span>
+            <span className="text-sm sm:text-xl font-bold truncate">{config.siteName}</span>
           </div>
-          <nav className="flex gap-6 items-center">
+          <nav className="flex gap-1 sm:gap-6 items-center ml-1 sm:ml-2">
             <button
               onClick={(e) => {
                 e.stopPropagation()
                 onNavigate("home")
               }}
-              className={`hover:opacity-70 transition-opacity ${
+              className={`text-xs sm:text-base hover:opacity-70 transition-opacity whitespace-nowrap ${
                 config.currentPage === "home" ? "opacity-100 font-bold" : "opacity-70"
               }`}
             >
-              Home
+              <span className="hidden sm:inline">Home</span>
+              <span className="sm:hidden">H</span>
             </button>
             <button
               onClick={(e) => {
                 e.stopPropagation()
                 onNavigate("about")
               }}
-              className={`hover:opacity-70 transition-opacity ${
+              className={`text-xs sm:text-base hover:opacity-70 transition-opacity whitespace-nowrap ${
                 config.currentPage === "about" ? "opacity-100 font-bold" : "opacity-70"
               }`}
             >
-              About
+              <span className="hidden sm:inline">About</span>
+              <span className="sm:hidden">A</span>
             </button>
             <button
               onClick={(e) => {
                 e.stopPropagation()
                 onNavigate("services")
               }}
-              className={`hover:opacity-70 transition-opacity ${
+              className={`text-xs sm:text-base hover:opacity-70 transition-opacity whitespace-nowrap ${
                 config.currentPage === "services" ? "opacity-100 font-bold" : "opacity-70"
               }`}
             >
-              Services
+              <span className="hidden sm:inline">Services</span>
+              <span className="sm:hidden">S</span>
             </button>
-            <a href="#contact" className="hover:opacity-70 transition-opacity">
+            <a
+              href="#contact"
+              className="text-xs sm:text-base hover:opacity-70 transition-opacity whitespace-nowrap hidden sm:inline"
+            >
               Contact
             </a>
             <button
@@ -184,15 +190,15 @@ export function DashboardComponent({
                 e.stopPropagation()
                 onToggleEditor()
               }}
-              className="ml-4 p-2 rounded-lg bg-primary text-primary-foreground hover:opacity-90 transition-opacity"
+              className="ml-1 sm:ml-4 p-1 sm:p-2 rounded-lg bg-primary text-primary-foreground hover:opacity-90 transition-opacity flex-shrink-0"
               title={isEditorOpen ? "Close editor" : "Open editor"}
             >
               {isEditorOpen ? (
-                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <svg className="w-3 h-3 sm:w-5 sm:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
                 </svg>
               ) : (
-                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <svg className="w-3 h-3 sm:w-5 sm:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path
                     strokeLinecap="round"
                     strokeLinejoin="round"
@@ -209,13 +215,13 @@ export function DashboardComponent({
       {/* Main Content */}
       <main
         style={{
-          padding: `${config.containerPadding}px`,
+          padding: `${config.containerPadding / 2}px ${config.containerPadding / 3}px`,
         }}
       >
-        <div className="max-w-7xl mx-auto space-y-12">
+        <div className="max-w-7xl mx-auto space-y-4 sm:space-y-12">
           {/* Hero Section */}
           <section
-            className="py-20 text-center rounded-lg"
+            className="py-6 sm:py-20 text-center rounded-lg"
             style={{
               ...getComponentStyle("hero"),
               backgroundColor: "#1A1A1A",
@@ -224,23 +230,23 @@ export function DashboardComponent({
             onClick={() => onSelectComponent("hero")}
           >
             <h1
-              className="font-bold mb-4"
+              className="font-bold mb-2 sm:mb-4 text-xl sm:text-4xl md:text-5xl px-2 sm:px-4"
               style={{
-                fontSize: `${config.baseFontSize * 3}px`,
+                fontSize: `clamp(1.25rem, 5vw, ${config.baseFontSize * 3}px)`,
               }}
             >
               {config.componentTitleContent?.["hero"] || currentPageConfig.heroTitle}
             </h1>
             <p
-              className="mb-8 opacity-80"
+              className="mb-3 sm:mb-8 opacity-80 px-2 sm:px-4 text-xs sm:text-base"
               style={{
-                fontSize: `${config.baseFontSize * 1.2}px`,
+                fontSize: `clamp(0.75rem, 3vw, ${config.baseFontSize * 1.2}px)`,
               }}
             >
               {config.componentDescriptionContent?.["hero"] || currentPageConfig.heroDescription}
             </p>
             <button
-              className={`px-8 py-3 rounded-lg font-semibold transition-all hover:opacity-90 ${shadowClass}`}
+              className={`px-4 sm:px-8 py-1.5 sm:py-3 rounded-lg font-semibold transition-all hover:opacity-90 text-xs sm:text-base ${shadowClass}`}
               style={{
                 backgroundColor: config.buttonBackgroundColor,
                 color: config.buttonTextColor,
@@ -265,17 +271,17 @@ export function DashboardComponent({
               onClick={() => onSelectComponent("features")}
             >
               <h2
-                className="text-3xl font-bold mb-8 text-center"
+                className="text-lg sm:text-3xl font-bold mb-3 sm:mb-8 text-center px-2 sm:px-4"
                 style={{
-                  fontSize: `${config.baseFontSize * 2}px`,
+                  fontSize: `clamp(1.125rem, 5vw, ${config.baseFontSize * 2}px)`,
                 }}
               >
                 Features
               </h2>
               <div
-                className="grid grid-cols-1 md:grid-cols-3"
+                className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 px-2 sm:px-0"
                 style={{
-                  gap: `${config.galleryGap}px`,
+                  gap: `${config.galleryGap / 2}px`,
                   justifyItems:
                     config.galleryAlignment === "center"
                       ? "center"
@@ -296,7 +302,7 @@ export function DashboardComponent({
                   return (
                     <div
                       key={i}
-                      className="p-6 rounded-lg"
+                      className="p-2 sm:p-6 rounded-lg"
                       style={getChildComponentStyle(featureCardId)}
                       onClick={(e) => {
                         e.stopPropagation()
@@ -308,7 +314,7 @@ export function DashboardComponent({
                         <img
                           src={cardImage || "/placeholder.svg"}
                           alt={`Feature ${i}`}
-                          className="w-full h-32 object-cover rounded-lg mb-4"
+                          className="w-full h-16 sm:h-32 object-cover rounded-lg mb-2 sm:mb-4"
                           style={{
                             borderRadius: `${galleryStyle.imageBorderRadius || config.imageBorderRadius}px`,
                             width: `${galleryStyle.imageSize || 100}%`,
@@ -319,7 +325,7 @@ export function DashboardComponent({
                         <img
                           src={featureImage || "/placeholder.svg"}
                           alt={`Feature ${i}`}
-                          className="w-full h-32 object-cover rounded-lg mb-4"
+                          className="w-full h-16 sm:h-32 object-cover rounded-lg mb-2 sm:mb-4"
                           style={{
                             borderRadius: `${galleryStyle.imageBorderRadius || config.imageBorderRadius}px`,
                             width: `${galleryStyle.imageSize || 100}%`,
@@ -328,21 +334,21 @@ export function DashboardComponent({
                         />
                       ) : (
                         <div
-                          className="w-12 h-12 rounded-lg mb-4"
+                          className="w-8 h-8 sm:w-12 sm:h-12 rounded-lg mb-2 sm:mb-4"
                           style={{
                             backgroundColor: config.buttonBackgroundColor,
                           }}
                         />
                       )}
-                      <h3 className="font-bold mb-2">
+                      <h3 className="font-bold mb-1 sm:mb-2 text-xs sm:text-base">
                         {config.componentTitleContent?.[featureCardId] || `Feature ${i}`}
                       </h3>
-                      <p className="text-sm opacity-70">
+                      <p className="text-xs sm:text-sm opacity-70">
                         {config.componentDescriptionContent?.[featureCardId] ||
                           "Description of your amazing feature goes here."}
                       </p>
                       {config.componentTextContent?.[featureCardId] && (
-                        <p className="text-sm mt-2">{config.componentTextContent[featureCardId]}</p>
+                        <p className="text-xs sm:text-sm mt-1 sm:mt-2">{config.componentTextContent[featureCardId]}</p>
                       )}
                     </div>
                   )
@@ -354,7 +360,7 @@ export function DashboardComponent({
           {/* About Page Content */}
           {config.currentPage === "about" && (
             <section
-              className="p-8 rounded-lg"
+              className="p-3 sm:p-8 rounded-lg"
               style={{
                 ...getComponentStyle("about-content"),
                 backgroundColor: "#1A1A1A",
@@ -363,17 +369,17 @@ export function DashboardComponent({
               onClick={() => onSelectComponent("about-content")}
             >
               <h2
-                className="font-bold mb-4"
+                className="font-bold mb-2 sm:mb-4 text-lg sm:text-3xl px-2 sm:px-0"
                 style={{
-                  fontSize: `${config.baseFontSize * 2}px`,
+                  fontSize: `clamp(1.125rem, 5vw, ${config.baseFontSize * 2}px)`,
                 }}
               >
                 Our Story
               </h2>
-              <p className="opacity-80 mb-4">
+              <p className="opacity-80 mb-2 sm:mb-4 px-2 sm:px-0 text-xs sm:text-base">
                 Founded in 2024, we believe in empowering creators with the tools they need to build amazing websites.
               </p>
-              <p className="opacity-80">
+              <p className="opacity-80 px-2 sm:px-0 text-xs sm:text-base">
                 Our mission is to make website building accessible to everyone, regardless of their technical
                 background.
               </p>
@@ -390,26 +396,26 @@ export function DashboardComponent({
               onClick={() => onSelectComponent("services-content")}
             >
               <h2
-                className="text-3xl font-bold mb-8 text-center"
+                className="text-lg sm:text-3xl font-bold mb-3 sm:mb-8 text-center px-2 sm:px-4"
                 style={{
-                  fontSize: `${config.baseFontSize * 2}px`,
+                  fontSize: `clamp(1.125rem, 5vw, ${config.baseFontSize * 2}px)`,
                 }}
               >
                 {config.componentTitleContent?.["services-content"] || "Our Services"}
               </h2>
               <p
-                className="text-center mb-8 opacity-80"
+                className="text-center mb-3 sm:mb-8 opacity-80 px-2 sm:px-4 text-xs sm:text-base"
                 style={{
-                  fontSize: `${config.baseFontSize * 1.1}px`,
+                  fontSize: `clamp(0.75rem, 3vw, ${config.baseFontSize * 1.1}px)`,
                 }}
               >
                 {config.componentDescriptionContent?.["services-content"] ||
                   "Comprehensive solutions for your website needs"}
               </p>
               <div
-                className="grid grid-cols-1 md:grid-cols-3"
+                className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 px-2 sm:px-0"
                 style={{
-                  gap: `${config.galleryGap}px`,
+                  gap: `${config.galleryGap / 2}px`,
                   justifyItems:
                     config.galleryAlignment === "center"
                       ? "center"
@@ -428,7 +434,7 @@ export function DashboardComponent({
                   return (
                     <div
                       key={i}
-                      className="p-6 rounded-lg text-center"
+                      className="p-2 sm:p-6 rounded-lg text-center"
                       style={getChildComponentStyle(serviceCardId)}
                       onClick={(e) => {
                         e.stopPropagation()
@@ -440,7 +446,7 @@ export function DashboardComponent({
                         <img
                           src={cardImage || "/placeholder.svg"}
                           alt={service}
-                          className="w-16 h-16 rounded-lg mb-4 mx-auto object-cover"
+                          className="w-8 h-8 sm:w-16 sm:h-16 rounded-lg mb-2 sm:mb-4 mx-auto object-cover"
                           style={{
                             borderRadius: `${galleryStyle.imageBorderRadius || config.imageBorderRadius}px`,
                             width: `${(galleryStyle.imageSize || 100) * 0.16}px`,
@@ -449,19 +455,21 @@ export function DashboardComponent({
                         />
                       ) : (
                         <div
-                          className="w-16 h-16 rounded-lg mb-4 mx-auto"
+                          className="w-8 h-8 sm:w-16 sm:h-16 rounded-lg mb-2 sm:mb-4 mx-auto"
                           style={{
                             backgroundColor: config.buttonBackgroundColor,
                           }}
                         />
                       )}
-                      <h3 className="font-bold mb-2">{config.componentTitleContent?.[serviceCardId] || service}</h3>
-                      <p className="text-sm opacity-70">
+                      <h3 className="font-bold mb-1 sm:mb-2 text-xs sm:text-base">
+                        {config.componentTitleContent?.[serviceCardId] || service}
+                      </h3>
+                      <p className="text-xs sm:text-sm opacity-70">
                         {config.componentDescriptionContent?.[serviceCardId] ||
                           `Professional ${service.toLowerCase()} services tailored to your needs.`}
                       </p>
                       {config.componentTextContent?.[serviceCardId] && (
-                        <p className="text-sm mt-2">{config.componentTextContent[serviceCardId]}</p>
+                        <p className="text-xs sm:text-sm mt-1 sm:mt-2">{config.componentTextContent[serviceCardId]}</p>
                       )}
                     </div>
                   )
@@ -472,7 +480,7 @@ export function DashboardComponent({
 
           {/* Call to Action Section */}
           <section
-            className="py-16 text-center rounded-lg"
+            className="py-6 sm:py-16 text-center rounded-lg"
             style={{
               ...getComponentStyle("cta"),
               backgroundColor: "#1A1A1A",
@@ -481,18 +489,18 @@ export function DashboardComponent({
             onClick={() => onSelectComponent("cta")}
           >
             <h2
-              className="font-bold mb-4"
+              className="font-bold mb-2 sm:mb-4 text-lg sm:text-3xl px-2 sm:px-4"
               style={{
-                fontSize: `${config.baseFontSize * 2}px`,
+                fontSize: `clamp(1.125rem, 5vw, ${config.baseFontSize * 2}px)`,
               }}
             >
               {config.componentTitleContent?.["cta"] || "Ready to Get Started?"}
             </h2>
-            <p className="mb-6 opacity-80">
+            <p className="mb-3 sm:mb-6 opacity-80 px-2 sm:px-4 text-xs sm:text-base">
               {config.componentDescriptionContent?.["cta"] || "Join thousands of users creating amazing websites"}
             </p>
             <button
-              className={`px-8 py-3 rounded-lg font-semibold transition-all hover:opacity-90 ${shadowClass}`}
+              className={`px-4 sm:px-8 py-1.5 sm:py-3 rounded-lg font-semibold transition-all hover:opacity-90 text-xs sm:text-base ${shadowClass}`}
               style={{
                 backgroundColor: config.buttonBackgroundColor,
                 color: config.buttonTextColor,
@@ -509,7 +517,7 @@ export function DashboardComponent({
 
           {/* Contact Form Section */}
           <section
-            className="p-8 rounded-lg"
+            className="p-3 sm:p-8 rounded-lg"
             id="contact"
             style={{
               ...getComponentStyle("contact"),
@@ -519,20 +527,20 @@ export function DashboardComponent({
             onClick={() => onSelectComponent("contact")}
           >
             <h2
-              className="font-bold mb-6 text-center"
+              className="font-bold mb-3 sm:mb-6 text-center text-lg sm:text-3xl px-2 sm:px-4"
               style={{
-                fontSize: `${config.baseFontSize * 2}px`,
+                fontSize: `clamp(1.125rem, 5vw, ${config.baseFontSize * 2}px)`,
               }}
             >
               Get In Touch
             </h2>
-            <div className="max-w-md mx-auto space-y-4">
+            <div className="max-w-md mx-auto space-y-2 sm:space-y-4 px-2 sm:px-0">
               <div>
-                <label className="block mb-2 font-semibold">Name</label>
+                <label className="block mb-1 sm:mb-2 font-semibold text-xs sm:text-base">Name</label>
                 <input
                   type="text"
                   placeholder="Your name"
-                  className="w-full px-4 py-2 rounded-lg bg-black text-white"
+                  className="w-full px-3 sm:px-4 py-1.5 sm:py-2 rounded-lg bg-black text-white text-xs sm:text-base"
                   style={{
                     borderRadius: `${config.buttonBorderRadius}px`,
                     border: `${config.strokeWidth}px solid ${config.strokeColor}`,
@@ -541,11 +549,11 @@ export function DashboardComponent({
                 />
               </div>
               <div>
-                <label className="block mb-2 font-semibold">Email</label>
+                <label className="block mb-1 sm:mb-2 font-semibold text-xs sm:text-base">Email</label>
                 <input
                   type="email"
                   placeholder="your@email.com"
-                  className="w-full px-4 py-2 rounded-lg bg-black text-white"
+                  className="w-full px-3 sm:px-4 py-1.5 sm:py-2 rounded-lg bg-black text-white text-xs sm:text-base"
                   style={{
                     borderRadius: `${config.buttonBorderRadius}px`,
                     border: `${config.strokeWidth}px solid ${config.strokeColor}`,
@@ -554,11 +562,11 @@ export function DashboardComponent({
                 />
               </div>
               <div>
-                <label className="block mb-2 font-semibold">Message</label>
+                <label className="block mb-1 sm:mb-2 font-semibold text-xs sm:text-base">Message</label>
                 <textarea
                   placeholder="Your message..."
-                  className="w-full px-4 py-2 rounded-lg bg-black text-white"
-                  rows={4}
+                  className="w-full px-3 sm:px-4 py-1.5 sm:py-2 rounded-lg bg-black text-white text-xs sm:text-base"
+                  rows={3}
                   style={{
                     borderRadius: `${config.buttonBorderRadius}px`,
                     border: `${config.strokeWidth}px solid ${config.strokeColor}`,
@@ -567,7 +575,7 @@ export function DashboardComponent({
                 />
               </div>
               <button
-                className={`w-full px-6 py-2 rounded-lg font-medium transition-all hover:opacity-90 ${shadowClass}`}
+                className={`w-full px-4 sm:px-6 py-1.5 sm:py-2 rounded-lg font-medium transition-all hover:opacity-90 text-xs sm:text-base ${shadowClass}`}
                 style={{
                   backgroundColor: config.buttonBackgroundColor,
                   color: config.buttonTextColor,
@@ -591,16 +599,16 @@ export function DashboardComponent({
         style={{
           ...getComponentStyle("footer"),
           borderColor: config.strokeColor,
-          padding: `${config.containerPadding}px`,
+          padding: `${config.containerPadding / 2}px ${config.containerPadding / 3}px`,
           backgroundColor: `${config.sectionBackgroundColor}cc`,
         }}
         onClick={() => onSelectComponent("footer")}
       >
         <div className="max-w-7xl mx-auto">
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
+          <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-2 sm:gap-8 mb-4 sm:mb-8 px-1 sm:px-0">
             <div>
-              <h4 className="font-bold mb-4">Product</h4>
-              <ul className="space-y-2 text-sm opacity-70">
+              <h4 className="font-bold mb-2 sm:mb-4 text-xs sm:text-base">Product</h4>
+              <ul className="space-y-1 sm:space-y-2 text-xs sm:text-sm opacity-70">
                 <li>
                   <button
                     onClick={(e) => {
@@ -640,8 +648,8 @@ export function DashboardComponent({
               </ul>
             </div>
             <div>
-              <h4 className="font-bold mb-4">Company</h4>
-              <ul className="space-y-2 text-sm opacity-70">
+              <h4 className="font-bold mb-2 sm:mb-4 text-xs sm:text-base">Company</h4>
+              <ul className="space-y-1 sm:space-y-2 text-xs sm:text-sm opacity-70">
                 <li>
                   <button
                     onClick={(e) => {
@@ -680,8 +688,8 @@ export function DashboardComponent({
               </ul>
             </div>
             <div>
-              <h4 className="font-bold mb-4">Resources</h4>
-              <ul className="space-y-2 text-sm opacity-70">
+              <h4 className="font-bold mb-2 sm:mb-4 text-xs sm:text-base">Resources</h4>
+              <ul className="space-y-1 sm:space-y-2 text-xs sm:text-sm opacity-70">
                 <li>
                   <button
                     onClick={(e) => {
@@ -721,8 +729,8 @@ export function DashboardComponent({
               </ul>
             </div>
             <div>
-              <h4 className="font-bold mb-4">Legal</h4>
-              <ul className="space-y-2 text-sm opacity-70">
+              <h4 className="font-bold mb-2 sm:mb-4 text-xs sm:text-base">Legal</h4>
+              <ul className="space-y-1 sm:space-y-2 text-xs sm:text-sm opacity-70">
                 <li>
                   <button
                     onClick={(e) => {
@@ -763,10 +771,10 @@ export function DashboardComponent({
             </div>
           </div>
           <div
-            className="border-t"
-            style={{ borderColor: config.strokeColor, paddingTop: `${config.containerPadding / 2}px` }}
+            className="border-t px-1 sm:px-0"
+            style={{ borderColor: config.strokeColor, paddingTop: `${config.containerPadding / 4}px` }}
           >
-            <p className="text-center text-sm opacity-50">
+            <p className="text-center text-xs sm:text-sm opacity-50">
               © 2025 {config.siteName}. All rights reserved. Click any section to edit it.
             </p>
           </div>

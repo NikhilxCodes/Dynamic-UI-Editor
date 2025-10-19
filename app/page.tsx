@@ -291,12 +291,16 @@ export default function Home() {
 
   return (
     <div
-      className="flex h-screen bg-background overflow-hidden"
+      className="flex flex-col lg:flex-row h-screen bg-background overflow-hidden"
       onMouseMove={handleMouseMove}
       onMouseUp={handleMouseUp}
     >
-      {/* Live Preview - adjusts width based on editor state */}
-      <div className={`flex-1 overflow-auto transition-all duration-300 ${isEditorOpen ? "w-2/3" : "w-full"}`}>
+      {/* Live Preview - Top half on mobile, left side on desktop */}
+      <div
+        className={`flex-1 overflow-auto transition-all duration-300 ${
+          isEditorOpen ? "lg:w-2/3 h-1/2 lg:h-screen" : "w-full h-full"
+        }`}
+      >
         <LivePreview
           config={config}
           selectedComponent={config.selectedComponent}
@@ -309,8 +313,9 @@ export default function Home() {
         />
       </div>
 
+      {/* Editor Panel - Bottom half on mobile, right side on desktop */}
       {isEditorOpen && (
-        <div className="w-1/3 bg-card border-l border-border shadow-2xl flex flex-col overflow-hidden">
+        <div className="w-full lg:w-1/3 bg-card border-t lg:border-t-0 lg:border-l border-border shadow-2xl flex flex-col overflow-hidden h-1/2 lg:h-screen">
           <EditorPanel
             config={config}
             selectedComponent={config.selectedComponent}

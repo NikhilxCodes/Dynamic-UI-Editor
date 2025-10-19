@@ -125,29 +125,29 @@ export function EditorPanel({
   }
 
   return (
-    <div className="flex flex-col h-full">
+    <div className="flex flex-col h-full bg-card">
       <div
-        className="sticky top-0 bg-card border-b border-border p-4 z-10 flex items-center justify-between"
+        className="sticky top-0 bg-card border-b border-border p-2 lg:p-4 z-10 flex items-center justify-between flex-shrink-0"
         data-editor-header
       >
-        <h2 className="text-lg font-bold">Editor Controls</h2>
+        <h2 className="text-sm lg:text-lg font-bold">Editor Controls</h2>
         {onCloseEditor && (
           <button
             onClick={onCloseEditor}
             className="p-1 hover:bg-secondary rounded transition-colors"
             title="Close editor"
           >
-            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <svg className="w-4 h-4 lg:w-5 lg:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
             </svg>
           </button>
         )}
       </div>
 
-      <div className="flex gap-2 mb-3 px-4 pt-4">
+      <div className="flex gap-1 lg:gap-2 px-2 lg:px-4 pt-2 lg:pt-4 flex-shrink-0">
         <button
           onClick={() => setEditMode("site")}
-          className={`flex-1 px-3 py-2 rounded text-sm font-medium transition-colors ${
+          className={`flex-1 px-2 lg:px-3 py-1 lg:py-2 rounded text-xs lg:text-sm font-medium transition-colors ${
             editMode === "site"
               ? "bg-primary text-primary-foreground"
               : "bg-secondary text-secondary-foreground hover:opacity-80"
@@ -157,7 +157,7 @@ export function EditorPanel({
         </button>
         <button
           onClick={() => setEditMode("component")}
-          className={`flex-1 px-3 py-2 rounded text-sm font-medium transition-colors ${
+          className={`flex-1 px-2 lg:px-3 py-1 lg:py-2 rounded text-xs lg:text-sm font-medium transition-colors ${
             editMode === "component"
               ? "bg-primary text-primary-foreground"
               : "bg-secondary text-secondary-foreground hover:opacity-80"
@@ -167,7 +167,7 @@ export function EditorPanel({
         </button>
       </div>
 
-      <p className="text-xs text-muted-foreground px-4">
+      <p className="text-xs px-2 lg:px-4 pt-2 lg:pt-3 pb-1 lg:pb-2 flex-shrink-0 text-muted-foreground">
         {editMode === "site"
           ? "Edit site-wide settings"
           : selectedChildComponent
@@ -178,7 +178,7 @@ export function EditorPanel({
       </p>
 
       {selectedComponent && selectedChildComponent && (
-        <div className="mt-2 flex items-center gap-2 text-xs text-muted-foreground px-4">
+        <div className="flex items-center gap-2 text-xs text-muted-foreground px-2 lg:px-4 pb-1 lg:pb-2 flex-shrink-0">
           <button onClick={() => onSelectChildComponent(null)} className="text-primary hover:underline">
             {selectedComponent}
           </button>
@@ -187,7 +187,7 @@ export function EditorPanel({
         </div>
       )}
 
-      <div className="flex-1 overflow-auto p-4 space-y-4">
+      <div className="flex-1 overflow-y-auto p-2 lg:p-4 space-y-3 lg:space-y-4 min-h-0">
         {editMode === "site" && (
           <>
             <ControlGroup
@@ -197,7 +197,7 @@ export function EditorPanel({
             >
               <div className="space-y-3">
                 <div>
-                  <label className="block text-sm font-medium mb-1">Site Logo</label>
+                  <label className="block text-xs lg:text-sm font-medium mb-1">Site Logo</label>
                   <input
                     type="file"
                     accept="image/*"
@@ -212,7 +212,7 @@ export function EditorPanel({
                         reader.readAsDataURL(file)
                       }
                     }}
-                    className="w-full px-3 py-2 bg-background border border-border rounded text-sm"
+                    className="w-full px-2 lg:px-3 py-1 lg:py-2 bg-background border border-border rounded text-xs lg:text-sm"
                   />
                 </div>
                 {config.siteLogo && (
@@ -220,11 +220,11 @@ export function EditorPanel({
                     <img
                       src={config.siteLogo || "/placeholder.svg"}
                       alt="Logo preview"
-                      className="w-full h-16 object-contain rounded"
+                      className="w-full h-12 lg:h-16 object-contain rounded"
                     />
                     <button
                       onClick={() => onUpdateConfig({ siteLogo: undefined })}
-                      className="w-full px-3 py-2 bg-red-500/20 text-red-500 rounded text-sm hover:bg-red-500/30 transition-colors"
+                      className="w-full px-2 lg:px-3 py-1 lg:py-2 bg-red-500/20 text-red-500 rounded text-xs lg:text-sm hover:bg-red-500/30 transition-colors"
                     >
                       Remove Logo
                     </button>
@@ -249,20 +249,20 @@ export function EditorPanel({
                   unit="px"
                 />
                 <div>
-                  <label className="block text-sm font-medium mb-1">Site Name</label>
+                  <label className="block text-xs lg:text-sm font-medium mb-1">Site Name</label>
                   <input
                     type="text"
                     value={config.siteName}
                     onChange={(e) => onUpdateConfig({ siteName: e.target.value })}
-                    className="w-full px-3 py-2 bg-background border border-border rounded text-sm"
+                    className="w-full px-2 lg:px-3 py-1 lg:py-2 bg-background border border-border rounded text-xs lg:text-sm"
                   />
                 </div>
                 <div>
-                  <label className="block text-sm font-medium mb-1">Site Description</label>
+                  <label className="block text-xs lg:text-sm font-medium mb-1">Site Description</label>
                   <textarea
                     value={config.siteDescription}
                     onChange={(e) => onUpdateConfig({ siteDescription: e.target.value })}
-                    className="w-full px-3 py-2 bg-background border border-border rounded text-sm"
+                    className="w-full px-2 lg:px-3 py-1 lg:py-2 bg-background border border-border rounded text-xs lg:text-sm"
                     rows={2}
                   />
                 </div>
@@ -460,8 +460,8 @@ export function EditorPanel({
         )}
 
         {editMode === "component" && !selectedComponent && (
-          <div className="p-4 bg-secondary/20 rounded-lg border border-border text-center">
-            <p className="text-sm text-muted-foreground">Click a section in the preview to edit it</p>
+          <div className="p-2 lg:p-4 bg-secondary/20 rounded-lg border border-border text-center">
+            <p className="text-xs lg:text-sm text-muted-foreground">Click a section in the preview to edit it</p>
           </div>
         )}
 
@@ -474,10 +474,12 @@ export function EditorPanel({
             >
               <div className="space-y-3">
                 <div>
-                  <label className="block text-sm font-medium mb-1">Component: {getChildComponentName()}</label>
+                  <label className="block text-xs lg:text-sm font-medium mb-1">
+                    Component: {getChildComponentName()}
+                  </label>
                   <button
                     onClick={() => onSelectChildComponent(null)}
-                    className="w-full px-3 py-2 bg-secondary text-secondary-foreground rounded text-sm hover:opacity-80 transition-opacity"
+                    className="w-full px-2 lg:px-3 py-1 lg:py-2 bg-secondary text-secondary-foreground rounded text-xs lg:text-sm hover:opacity-80 transition-opacity"
                   >
                     Back to Parent
                   </button>
@@ -492,21 +494,21 @@ export function EditorPanel({
             >
               <div className="space-y-3">
                 <div>
-                  <label className="block text-sm font-medium mb-1">Edit Title</label>
+                  <label className="block text-xs lg:text-sm font-medium mb-1">Edit Title</label>
                   <input
                     type="text"
                     value={config.componentTitleContent?.[selectedChildComponent] || ""}
                     onChange={(e) => onUpdateComponentTitle(selectedChildComponent, e.target.value)}
-                    className="w-full px-3 py-2 bg-background border border-border rounded text-sm"
+                    className="w-full px-2 lg:px-3 py-1 lg:py-2 bg-background border border-border rounded text-xs lg:text-sm"
                     placeholder="Enter title text"
                   />
                 </div>
                 <div>
-                  <label className="block text-sm font-medium mb-1">Edit Description</label>
+                  <label className="block text-xs lg:text-sm font-medium mb-1">Edit Description</label>
                   <textarea
                     value={config.componentDescriptionContent?.[selectedChildComponent] || ""}
                     onChange={(e) => onUpdateComponentDescription(selectedChildComponent, e.target.value)}
-                    className="w-full px-3 py-2 bg-background border border-border rounded text-sm"
+                    className="w-full px-2 lg:px-3 py-1 lg:py-2 bg-background border border-border rounded text-xs lg:text-sm"
                     rows={3}
                     placeholder="Enter description text"
                   />
@@ -524,7 +526,7 @@ export function EditorPanel({
                 >
                   <div className="space-y-3">
                     <div>
-                      <label className="block text-sm font-medium mb-2">Upload Background Image</label>
+                      <label className="block text-xs lg:text-sm font-medium mb-2">Upload Background Image</label>
                       <input
                         type="file"
                         accept="image/*"
@@ -539,7 +541,7 @@ export function EditorPanel({
                             reader.readAsDataURL(file)
                           }
                         }}
-                        className="w-full px-3 py-2 bg-background border border-border rounded text-sm"
+                        className="w-full px-2 lg:px-3 py-1 lg:py-2 bg-background border border-border rounded text-xs lg:text-sm"
                       />
                     </div>
                     {config.componentBackgroundImages?.[selectedChildComponent] && (
@@ -551,7 +553,7 @@ export function EditorPanel({
                         />
                         <button
                           onClick={() => onUpdateComponentBackgroundImage(selectedChildComponent, "")}
-                          className="w-full px-3 py-2 bg-red-500/20 text-red-500 rounded text-sm hover:bg-red-500/30 transition-colors"
+                          className="w-full px-2 lg:px-3 py-1 lg:py-2 bg-red-500/20 text-red-500 rounded text-xs lg:text-sm hover:bg-red-500/30 transition-colors"
                         >
                           Remove Background Image
                         </button>
@@ -801,7 +803,7 @@ export function EditorPanel({
 
                 {config.childComponentLayoutStyles?.[selectedChildComponent]?.display === "grid" && (
                   <div>
-                    <label className="block text-sm font-medium mb-1">Grid Columns</label>
+                    <label className="block text-xs lg:text-sm font-medium mb-1">Grid Columns</label>
                     <input
                       type="text"
                       value={
@@ -816,7 +818,7 @@ export function EditorPanel({
                         }
                         onUpdateConfig({ childComponentLayoutStyles: updatedLayouts })
                       }}
-                      className="w-full px-3 py-2 bg-background border border-border rounded text-sm"
+                      className="w-full px-2 lg:px-3 py-1 lg:py-2 bg-background border border-border rounded text-xs lg:text-sm"
                       placeholder="e.g., repeat(3, 1fr)"
                     />
                   </div>
@@ -851,10 +853,10 @@ export function EditorPanel({
             >
               <div className="space-y-3">
                 <div>
-                  <label className="block text-sm font-medium mb-1">Component: {selectedComponent}</label>
+                  <label className="block text-xs lg:text-sm font-medium mb-1">Component: {selectedComponent}</label>
                   <button
                     onClick={() => onSelectComponent(null)}
-                    className="w-full px-3 py-2 bg-secondary text-secondary-foreground rounded text-sm hover:opacity-80 transition-opacity"
+                    className="w-full px-2 lg:px-3 py-1 lg:py-2 bg-secondary text-secondary-foreground rounded text-xs lg:text-sm hover:opacity-80 transition-opacity"
                   >
                     Deselect Component
                   </button>
@@ -874,21 +876,21 @@ export function EditorPanel({
                   selectedComponent === "cta") && (
                   <>
                     <div>
-                      <label className="block text-sm font-medium mb-1">Edit Title</label>
+                      <label className="block text-xs lg:text-sm font-medium mb-1">Edit Title</label>
                       <input
                         type="text"
                         value={config.componentTitleContent?.[selectedComponent] || ""}
                         onChange={(e) => onUpdateComponentTitle(selectedComponent, e.target.value)}
-                        className="w-full px-3 py-2 bg-background border border-border rounded text-sm"
+                        className="w-full px-2 lg:px-3 py-1 lg:py-2 bg-background border border-border rounded text-xs lg:text-sm"
                         placeholder="Enter title text"
                       />
                     </div>
                     <div>
-                      <label className="block text-sm font-medium mb-1">Edit Description</label>
+                      <label className="block text-xs lg:text-sm font-medium mb-1">Edit Description</label>
                       <textarea
                         value={config.componentDescriptionContent?.[selectedComponent] || ""}
                         onChange={(e) => onUpdateComponentDescription(selectedComponent, e.target.value)}
-                        className="w-full px-3 py-2 bg-background border border-border rounded text-sm"
+                        className="w-full px-2 lg:px-3 py-1 lg:py-2 bg-background border border-border rounded text-xs lg:text-sm"
                         rows={3}
                         placeholder="Enter description text"
                       />
@@ -905,7 +907,7 @@ export function EditorPanel({
             >
               <div className="space-y-3">
                 <div>
-                  <label className="block text-sm font-medium mb-2">Upload Background Image</label>
+                  <label className="block text-xs lg:text-sm font-medium mb-2">Upload Background Image</label>
                   <input
                     type="file"
                     accept="image/*"
@@ -920,7 +922,7 @@ export function EditorPanel({
                         reader.readAsDataURL(file)
                       }
                     }}
-                    className="w-full px-3 py-2 bg-background border border-border rounded text-sm"
+                    className="w-full px-2 lg:px-3 py-1 lg:py-2 bg-background border border-border rounded text-xs lg:text-sm"
                   />
                 </div>
                 {config.componentBackgroundImages?.[selectedComponent] && (
@@ -932,7 +934,7 @@ export function EditorPanel({
                     />
                     <button
                       onClick={() => onUpdateComponentBackgroundImage(selectedComponent, "")}
-                      className="w-full px-3 py-2 bg-red-500/20 text-red-500 rounded text-sm hover:bg-red-500/30 transition-colors"
+                      className="w-full px-2 lg:px-3 py-1 lg:py-2 bg-red-500/20 text-red-500 rounded text-xs lg:text-sm hover:bg-red-500/30 transition-colors"
                     >
                       Remove Background Image
                     </button>
@@ -1131,7 +1133,7 @@ export function EditorPanel({
 
                 {config.componentLayoutStyles?.[selectedComponent]?.display === "grid" && (
                   <div>
-                    <label className="block text-sm font-medium mb-1">Grid Columns</label>
+                    <label className="block text-xs lg:text-sm font-medium mb-1">Grid Columns</label>
                     <input
                       type="text"
                       value={config.componentLayoutStyles?.[selectedComponent]?.gridTemplateColumns || "repeat(3, 1fr)"}
@@ -1143,7 +1145,7 @@ export function EditorPanel({
                         }
                         onUpdateConfig({ componentLayoutStyles: updatedLayouts })
                       }}
-                      className="w-full px-3 py-2 bg-background border border-border rounded text-sm"
+                      className="w-full px-2 lg:px-3 py-1 lg:py-2 bg-background border border-border rounded text-xs lg:text-sm"
                       placeholder="e.g., repeat(3, 1fr)"
                     />
                   </div>
@@ -1170,10 +1172,10 @@ export function EditorPanel({
         )}
       </div>
 
-      <div className="sticky bottom-0 bg-card border-t border-border p-4 space-y-2">
+      <div className="bg-card border-t border-border p-2 lg:p-3 space-y-1 lg:space-y-2 flex-shrink-0">
         {(selectedComponent || selectedChildComponent) && (
-          <div className="mb-3 p-2 bg-secondary/20 rounded border border-border text-xs text-muted-foreground text-center">
-            <span className="font-medium">
+          <div className="mb-1 p-1 lg:p-2 bg-secondary/20 rounded border border-border text-xs text-muted-foreground text-center">
+            <span className="font-medium text-xs">
               {selectedChildComponent
                 ? `Editing: ${getChildComponentName()}`
                 : selectedComponent
@@ -1184,13 +1186,13 @@ export function EditorPanel({
         )}
         <button
           onClick={onExportConfig}
-          className="w-full px-4 py-2 bg-primary text-primary-foreground rounded-lg font-medium hover:opacity-90 transition-opacity text-sm"
+          className="w-full px-2 lg:px-3 py-1.5 lg:py-2 bg-primary text-primary-foreground rounded-lg font-medium hover:opacity-90 transition-opacity text-xs lg:text-sm"
         >
           Export Config
         </button>
         <button
           onClick={onResetConfig}
-          className="w-full px-4 py-2 bg-secondary text-secondary-foreground rounded-lg font-medium hover:opacity-90 transition-opacity text-sm"
+          className="w-full px-2 lg:px-3 py-1.5 lg:py-2 bg-secondary text-secondary-foreground rounded-lg font-medium hover:opacity-90 transition-opacity text-xs lg:text-sm"
         >
           Reset to Default
         </button>
